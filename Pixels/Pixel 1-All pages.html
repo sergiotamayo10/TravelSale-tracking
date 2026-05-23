@@ -4,11 +4,11 @@
 
   // ── CONFIG ──────────────────────────────────────────────
   var travelsaleKeywords = [
-    'paid', 'cpc', 'email', 'travelsale', 'travel_sale', 'travel-sale', 'travel.sale', 'travelsale2026', 'travelsale_2026', 'travelsale-2026', 'ts2026', 'ts_2026', 'ts-2026', 'travelsale_jun', 'travelsale_junio', 'travelsalejunio', 'travelsaleco', 'travelsale_co', 'travelsalecolombia', 'ccce', 'ccceco', 'ccce2026', 'travelsael', 'travelslae', 'travelsalee', 'epsilon'
+    'Icommarketing', 'paid', 'travelsale', 'travel_sale', 'travel-sale', 'travel.sale', 'travelsale2026', 'travelsale_2026', 'travelsale-2026', 'ts2026', 'ts_2026', 'ts-2026', 'travelsale_jun', 'travelsale_junio', 'travelsalejunio', 'travelsaleco', 'travelsale_co', 'travelsalecolombia', 'ccce', 'ccceco', 'ccce2026', 'travelsael', 'travelslae', 'travelsalee', 'epsilon'
   ];
 
   var foreignKeywords = [
-    //'newsletter', 'crm', 'email', 'sms', 'push', 'push_notification', 'whatsapp', 'telegram', 'facebook', 'instagram', 'cpc', 'paid', 'always_on', 'brand_always_on', 'pago', 'pauta', 'tiktok', 'pinterest', 'fb', 'ig', 'social', 'ppc'
+    'google', 'newsletter', 'crm', 'sms', 'push', 'push_notification'//,'email', 'whatsapp', 'telegram', 'facebook', 'instagram', 'cpc', 'paid', 'always_on', 'brand_always_on', 'pago', 'pauta', 'tiktok', 'pinterest', 'fb', 'ig', 'social', 'ppc'
   ];
 
   var referrerDomains = [
@@ -103,6 +103,8 @@
     detection_signal: detectionSignal,
     landed_at:        new Date().toISOString()
   };
+
+  console.log(detection_signal);
 
   try {
     sessionStorage.setItem('travelsale_data', JSON.stringify(tsData));
