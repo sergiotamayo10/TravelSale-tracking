@@ -1,19 +1,19 @@
-<!-- Hotsale UTM Capture -->
+<!-- Travelsale UTM Capture -->
 <script>
 (function() {
 
   // ── CONFIG ──────────────────────────────────────────────
-  var hotsaleKeywords = [
-    'hotsale', 'hot_sale', 'hot-sale', 'hot.sale', 'hotsale2026', 'hotsale_2026', 'hotsale-2026', 'hs2026', 'hs_2026', 'hs-2026', 'hotsale_mar', 'hotsale_marzo', 'hotsalemarzo', 'hotsale_oct', 'hotsale_octubre', 'hotsaleoct', 'hotsaleco', 'hotsale_co', 'hotsalecolombia', 'ccce', 'ccceco', 'ccce2026', 'hotsael', 'hotslae', 'hotsalee', 'epsilon'
+  var travelsaleKeywords = [
+    'paid', 'cpc', 'email', 'travelsale', 'travel_sale', 'travel-sale', 'travel.sale', 'travelsale2026', 'travelsale_2026', 'travelsale-2026', 'ts2026', 'ts_2026', 'ts-2026', 'travelsale_jun', 'travelsale_junio', 'travelsalejunio', 'travelsaleco', 'travelsale_co', 'travelsalecolombia', 'ccce', 'ccceco', 'ccce2026', 'travelsael', 'travelslae', 'travelsalee', 'epsilon'
   ];
 
   var foreignKeywords = [
-    'newsletter', 'crm', 'email', 'sms', 'push', 'push_notification', 'whatsapp', 'telegram', 'facebook', 'instagram', 'cpc', 'paid', 'always_on', 'brand_always_on', 'pago', 'pauta', 'tiktok', 'pinterest', 'fb', 'ig', 'social', 'ppc'
+    //'newsletter', 'crm', 'email', 'sms', 'push', 'push_notification', 'whatsapp', 'telegram', 'facebook', 'instagram', 'cpc', 'paid', 'always_on', 'brand_always_on', 'pago', 'pauta', 'tiktok', 'pinterest', 'fb', 'ig', 'social', 'ppc'
   ];
 
   var referrerDomains = [
-    'hotsale.com.co', 'www.hotsale.com.co',
-    'hotsale.co',     'www.hotsale.co'
+    'travelsale.com.co', 'www.travelsale.com.co',
+    'travelsale.co',     'www.travelsale.co'
   ];
   // ────────────────────────────────────────────────────────
 
@@ -27,7 +27,7 @@
     params.get('utm_id')
   ];
 
-  // ── CONDITION B — Referrer is hotsale.com.co ─────────────
+  // ── CONDITION B — Referrer is travelsale.com.co ─────────────
   var conditionB = false;
   if (document.referrer) {
     try {
@@ -41,15 +41,15 @@
     } catch(e) {}
   }
 
-  // ── CONDITION A — Hotsale keyword in any UTM ─────────────
+  // ── CONDITION A — Travelsale keyword in any UTM ─────────────
   // Only evaluated when B failed — saves processing
   var conditionA = false;
   if (!conditionB) {
     for (var i = 0; i < utmValues.length; i++) {
       if (!utmValues[i]) continue;
       var utmLower = utmValues[i].toLowerCase();
-      for (var k = 0; k < hotsaleKeywords.length; k++) {
-        if (utmLower.indexOf(hotsaleKeywords[k]) !== -1) {
+      for (var k = 0; k < travelsaleKeywords.length; k++) {
+        if (utmLower.indexOf(travelsaleKeywords[k]) !== -1) {
           conditionA = true;
           break;
         }
@@ -81,27 +81,34 @@
   }
 
   // ── FINAL GATE ───────────────────────────────────────────
-  var isHotsale = conditionB || (conditionA && conditionC);
+  var isTravelsale = conditionB || (conditionA && conditionC);
 
-  if (!isHotsale) return;
+  if (!isTravelsale) return;
 
+  // ── DETECTION SIGNAL — audit trail ──────────────────────
+  var detectionSignal = (conditionB && conditionA) ? 'referrer+utm'  :
+                         conditionB                ? 'referrer_only' :
+                                                     'utm+no_foreign';
 
   // ── STORE ────────────────────────────────────────────────
-  var hsData = {
+  var tsData = {
     utm_source:       params.get('utm_source')   || '',
     utm_medium:       params.get('utm_medium')   || '',
     utm_campaign:     params.get('utm_campaign') || '',
     utm_content:      params.get('utm_content') || '',
     utm_term:         params.get('utm_term') || '',
     utm_id:           params.get('utm_id') || '',
-    store_domain:     window.location.hostname
+    store_domain:     window.location.hostname,
+    referrer:         document.referrer          || '',
+    detection_signal: detectionSignal,
+    landed_at:        new Date().toISOString()
   };
 
   try {
-    sessionStorage.setItem('hotsale_data', JSON.stringify(hsData));
-    localStorage.setItem('hotsale_data',   JSON.stringify(hsData));
+    sessionStorage.setItem('travelsale_data', JSON.stringify(tsData));
+    localStorage.setItem('travelsale_data',   JSON.stringify(tsData));
   } catch(e) {}
 
 })();
 </script>
-<!-- End Hotsale UTM Capture -->
+<!-- End Travelsale UTM Capture -->
