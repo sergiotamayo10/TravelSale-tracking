@@ -1,11 +1,11 @@
-# Hotsale Tracking Pixel — hotsale.com.co
+# Travelsale Tracking Pixel — travelsale.com.co
 
-Sistema de tracking de conversiones cross-domain para el evento Hotsale Colombia.
-Captura compras realizadas en sitios de aliados atribuidas a tráfico de Hotsale.
+Sistema de tracking de conversiones cross-domain para el evento Travelsale Colombia.
+Captura compras realizadas en sitios de aliados atribuidas a tráfico de Travelsale.
 
 ## ¿Cómo funciona?
 ```
-Campaña Hotsale → Usuario llega al aliado con UTM
+Campaña Travelsale → Usuario llega al aliado con UTM
                           ↓
              Tag 1 detecta UTM y guarda en localStorage
                           ↓
@@ -34,8 +34,8 @@ Campaña Hotsale → Usuario llega al aliado con UTM
 
 ### Keywords de detección activas
 ```javascript
-var hotsaleKeywords = [
-    'hotsale', 'hot_sale', 'hot-sale', 'hot.sale', 'hotsale2026', 'hotsale_2026', 'hotsale-2026', 'hs2026', 'hs_2026', 'hs-2026', 'hotsale_mar', 'hotsale_marzo', 'hotsalemarzo', 'hotsale_oct', 'hotsale_octubre', 'hotsaleoct', 'hotsaleco', 'hotsale_co', 'hotsalecolombia', 'ccce', 'ccceco', 'ccce2026', 'hotsael', 'hotslae', 'hotsalee', 'epsilon'
+var TravelsaleKeywords = [
+    'Travelsale', 'Travel_sale', 'Travel-sale', 'Travel.sale', 'Travelsale2026', 'Travelsale_2026', 'Travelsale-2026', 'ts2026', 'ts_2026', 'ts-2026', 'Travelsale_mar', 'Travelsale_marzo', 'Travelsalemarzo', 'Travelsale_oct', 'Travelsale_octubre', 'Travelsaleoct', 'Travelsaleco', 'Travelsale_co', 'Travelsalecolombia', 'ccce', 'ccceco', 'ccce2026', 'Travelsael', 'Travelslae', 'Travelsalee', 'epsilon'
   ];
 ```
 ### Keywords de exclusión de tráfico
@@ -44,16 +44,16 @@ var hotsaleKeywords = [
     'newsletter', 'crm', 'email', 'sms', 'push', 'push_notification', 'whatsapp', 'telegram', 'facebook', 'instagram', 'cpc', 'paid', 'always_on', 'brand_always_on', 'pago', 'pauta', 'tiktok', 'pinterest', 'fb', 'ig', 'social', 'ppc'
   ];
 ```
-### Keywords de detección de referral hotsale
+### Keywords de detección de referral Travelsale
 ```javascript
   var referrerDomains = [
-    'hotsale.com.co', 'www.hotsale.com.co',
-    'hotsale.co',     'www.hotsale.co'
+    'Travelsale.com.co', 'www.Travelsale.com.co',
+    'Travelsale.co',     'www.Travelsale.co'
   ];
 ```
 
 
-# Modelo de Atribución — Hotsale Tracking Pixel:
+# Modelo de Atribución — Travelsale Tracking Pixel:
 ┌─────────────────────────────────────────────────────────────────┐
 │                    FUENTES DE TRÁFICO                           │
 │         Meta Ads · Google Ads · Email · Orgánico               │
@@ -61,11 +61,11 @@ var hotsaleKeywords = [
                        │ UTM parameters
                        ▼
 ┌─────────────────────────────────────────────────────────────────┐
-│                   HOTSALE.COM.CO                                │
+│                   TravelSALE.COM.CO                                │
 │              (punto de entrada obligatorio)                     │
 │         Todo el tráfico hacia aliados pasa por aquí            │
 └──────────────────────┬──────────────────────────────────────────┘
-                       │ redirect → referrer = hotsale.com.co
+                       │ redirect → referrer = Travelsale.com.co
                        ▼
 ┌─────────────────────────────────────────────────────────────────┐
 │                    ALLY STORE                                   │
@@ -74,7 +74,7 @@ var hotsaleKeywords = [
 │   ┌─────────────────────────────────────────────────────┐      │
 │   │                                                     │      │
 │   │   CONDITION B (primary)                             │      │
-│   │   referrer === hotsale.com.co?                      │      │
+│   │   referrer === Travelsale.com.co?                      │      │
 │   │          │                                          │      │
 │   │          ├── YES → DETECTED ✅                      │      │
 │   │          │         detection_signal: referrer_only  │      │
@@ -83,7 +83,7 @@ var hotsaleKeywords = [
 │   │          └── NO (referrer dropped)                  │      │
 │   │                    │                                │      │
 │   │               CONDITION A                           │      │
-│   │               UTM contains Hotsale keyword?         │      │
+│   │               UTM contains Travelsale keyword?         │      │
 │   │                    │                                │      │
 │   │                    ├── NO  → NOT DETECTED ❌        │      │
 │   │                    │                                │      │
@@ -111,7 +111,7 @@ var hotsaleKeywords = [
 │                       ▼                                         │
 │   TAG 2 — Customer Events / GTM Thank You Page                 │
 │   ┌─────────────────────────────────────────────────────┐      │
-│   │ Reads localStorage → validates hsData exists        │      │
+│   │ Reads localStorage → validates tsData exists        │      │
 │   │ Reads order_id · order_value from dataLayer          │      │
 │   └─────────────────────────────────────────────────────┘      │
 └──────────────────────┬──────────────────────────────────────────┘
@@ -122,7 +122,7 @@ var hotsaleKeywords = [
 │                                                                │
 │  ┌─────────────────┐ ┌──────────────┐ ┌─────────────────────┐  │
 │  │  Google Sheet   │ │     GA4      │ │     Meta Pixel      │  │
-│  │  (Apps Script)  │ │  (Hotsale)   │ │     (Hotsale)       │  │
+│  │  (Apps Script)  │ │  (Travelsale)   │ │     (Travelsale)       │  │
 │  │                 │ │              │ │                     │  │
 │  │ • Fecha         │ │ • purchase   │ │ • Purchase event    │  │
 │  │ • store_domain  │ │ • order_id   │ │ • value · currency  │  │
@@ -150,12 +150,12 @@ Señal de atribución:
 │  Señales en orden de prioridad:                              │
 │                                                              │
 │  1. REFERRER (B) — strongest                                 │
-│     Prueba física de paso por hotsale.com.co                 │
+│     Prueba física de paso por Travelsale.com.co                 │
 │     Confiabilidad: ~100% cuando está presente                │
 │     Frecuencia: ~65% de sesiones                             │
 │                                                              │
 │  2. UTM + NO FOREIGN (A AND C) — fallback                    │
-│     Keyword Hotsale en UTM + ausencia de señales del aliado  │
+│     Keyword Travelsale en UTM + ausencia de señales del aliado  │
 │     Confiabilidad: ~85% cuando está presente                 │
 │     Frecuencia: ~20% adicional de sesiones                   │
 │                                                              │
@@ -167,7 +167,7 @@ Señal de atribución:
 
 LIMITACIONES:
 ✅ CAPTURA
-   Usuario llega con UTM Hotsale → compra en la misma sesión
+   Usuario llega con UTM Travelsale → compra en la misma sesión
    Usuario llega → navega varias páginas → compra (misma sesión)
    Usuario llega por Meta Ad con UTM → compra (mismo dispositivo)
 
