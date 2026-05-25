@@ -41,7 +41,7 @@ var TravelsaleKeywords = [
 ### Keywords de exclusión de tráfico
  ```javascript
   var foreignKeywords = [
-    'newsletter', 'crm', 'email', 'sms', 'push', 'push_notification', 'whatsapp', 'telegram', 'facebook', 'instagram', 'cpc', 'paid', 'always_on', 'brand_always_on', 'pago', 'pauta', 'tiktok', 'pinterest', 'fb', 'ig', 'social', 'ppc'
+    'always_on', 'brand_always_on'
   ];
 ```
 ### Keywords de detección de referral Travelsale
