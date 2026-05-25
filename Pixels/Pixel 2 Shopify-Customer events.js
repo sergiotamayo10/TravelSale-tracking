@@ -1,26 +1,28 @@
 analytics.subscribe('checkout_completed', (event) => {
   // ── CONFIG ──────────────────────────────────────────────
-  var GA4_ID          = 'G-CD4K6VN4YV';
+  var GA4_ID          = 'G-R4P7Q8LVWW';
   var META_PIXEL_ID   = '8614226731956808';
-  var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbydRbTiMXNk8_yzuVMPcyMMlDv1_XG4zt5CO9tJPMqgIDMjRrg_gfp2o5Br4S3W-gGc/exec';
+  var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxaIuH42xCkriDGv1fUMkvjX-Nk1Qp9sis7_3yC22TwBa_gNNYccPZAgbw0GH4hWO2_/exec';
   // ────────────────────────────────────────────────────────
 
   // 1. RECOVER SESSION
-  var hsData = null;
+  var tsData = null;
   try {
-    var raw = sessionStorage.getItem('hotsale_data') || localStorage.getItem('hotsale_data');
-    if (raw) hsData = JSON.parse(raw);
+    var raw = sessionStorage.getItem('travelsale_data') || localStorage.getItem('travelsale_data');
+    if (raw) tsData = JSON.parse(raw);
   } catch(e) {}
-  if (!hsData) return;
+  if (!tsData) return;
 
-  // 2. VALIDATE — must have at least one UTM to confirm Hotsale session
-  var utmSource   = hsData.utm_source   || '';
-  var utmMedium   = hsData.utm_medium   || '';
-  var utmCampaign = hsData.utm_campaign || '';
-  var utmContent  = hsData.utm_content  || '';
-  var utmTerm     = hsData.utm_term     || '';
-  var utmId       = hsData.utm_id       || '';
-  var storeDomain = hsData.store_domain || event.data.checkout.shop?.domain || '';
+  // 2. VALIDATE — must have at least one UTM to confirm travelsale session
+  var utmSource   = tsData.utm_source   || '';
+  var utmMedium   = tsData.utm_medium   || '';
+  var utmCampaign = tsData.utm_campaign || '';
+  var utmContent  = tsData.utm_content  || '';
+  var utmTerm     = tsData.utm_term     || '';
+  var utmId       = tsData.utm_id       || '';
+  var storeDomain = tsData.store_domain || event.data.checkout.shop?.domain || '';
+  var referrer = tsData.referrer;
+  var arrivalTime = tsData.landed_at;
 
   if (!utmSource && !utmMedium && !utmCampaign && !utmContent && !utmTerm && !utmId) return;
 
@@ -35,7 +37,9 @@ analytics.subscribe('checkout_completed', (event) => {
     fetch(APPS_SCRIPT_URL, {
       method:    'POST',
       body:      JSON.stringify({
+        arrival_time: arrivalTime,
         store_domain: storeDomain,
+        referrer:     referrer,
         utm_source:   utmSource,
         utm_medium:   utmMedium,
         utm_campaign: utmCampaign,
@@ -69,7 +73,8 @@ analytics.subscribe('checkout_completed', (event) => {
         utm_content:    utmContent,
         utm_term:       utmTerm,
         utm_id:         utmId,
-        store_domain:   storeDomain
+        store_domain:   storeDomain,
+        page_referrer:  referrer
       });
     } catch(e) {}
   }
@@ -129,7 +134,7 @@ analytics.subscribe('checkout_completed', (event) => {
 
   // 7. CLEANUP
   try {
-    localStorage.removeItem('hotsale_data');
-    sessionStorage.removeItem('hotsale_data');
+    localStorage.removeItem('travelsale_data');
+    sessionStorage.removeItem('travelsale_data');
   } catch(e) {}
 });

@@ -89,6 +89,7 @@
   var detectionSignal = (conditionB && conditionA) ? 'referrer+utm'  :
                          conditionB                ? 'referrer_only' :
                                                      'utm+no_foreign';
+  console.log('detectionSignal:', detectionSignal);
 
   // ── STORE ────────────────────────────────────────────────
   var tsData = {
@@ -101,12 +102,14 @@
     store_domain:     window.location.hostname,
     referrer:         document.referrer          || '',
     detection_signal: detectionSignal,
-    landed_at:        new Date().toLocaleString('es-CO', { timeZone: 'America/Bogota' })
+    landed_at:        new Date().toLocaleString('sv-SE', { timeZone: 'America/Bogota' })
   };
 
   try {
     sessionStorage.setItem('travelsale_data', JSON.stringify(tsData));
     localStorage.setItem('travelsale_data',   JSON.stringify(tsData));
+    sessionStorage.removeItem('hotsale_data');
+    localStorage.removeItem('hotsale_data');
   } catch(e) {}
 
 })();
