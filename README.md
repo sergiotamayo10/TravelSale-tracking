@@ -27,10 +27,10 @@ Campaña Travelsale → Usuario llega al aliado con UTM
 
 | Plataforma | Tag 1 | Tag 2 | Guía |
 |---|---|---|---|
-| Shopify | theme.liquid | [ver](Pixels/Pixel%201-All%20pages.html) |
-| Shopify | Customer Events | [ver](Pixels/Pixel%202%20Shopify-Customer%20events.js) |
-| VTEX / Otros / GTM | All Pages | [ver](Pixels/Pixel%201-All%20pages.html) |
-| VTEX / Otros / GTM | Confirmation page | [ver](Pixels/Pixel%202%20GTM%20-Confirm%20page.html) |
+| Shopify | theme.liquid | [ver](Pixels/Pixel%201-All%20pages.html) | [En Shopify](https://drive.google.com/file/d/17YOgVuAJz3q6U6BdjcLmB6UXIjxiCsnu/view?usp=sharing)
+| Shopify | Customer Events | [ver](Pixels/Pixel%202%20Shopify-Customer%20events.js) | [En Shopify](https://drive.google.com/file/d/17YOgVuAJz3q6U6BdjcLmB6UXIjxiCsnu/view?usp=sharing)
+| VTEX / Otros / GTM | All Pages | [ver](Pixels/Pixel%201-All%20pages.html) | [En Tag manager](https://drive.google.com/file/d/1GQyFn6_z0cLH0iPJPv-7b5kHQtCHOEeG/view?usp=sharing)
+| VTEX / Otros / GTM | Confirmation page | [ver](Pixels/Pixel%202%20GTM%20-Confirm%20page.html) | [En Tag manager](https://drive.google.com/file/d/1GQyFn6_z0cLH0iPJPv-7b5kHQtCHOEeG/view?usp=sharing)
 
 ### Keywords de detección activas
 ```javascript
