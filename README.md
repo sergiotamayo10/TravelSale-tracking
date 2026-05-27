@@ -54,7 +54,7 @@ var TravelsaleKeywords = [
 
 
 # Modelo de Atribución — Travelsale Tracking Pixel:
-![Modelo de atribución](./analytics/attribution_model_travelsale.svg)
+![Modelo de atribución](./.cora/attribution_model_travelsale.svg)
 
 LIMITACIONES:
 ✅ CAPTURA
