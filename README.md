@@ -25,7 +25,7 @@ Campaña Travelsale → Usuario llega al aliado con UTM
 
 ## Instalación por plataforma
 
-| Plataforma | Tag 1 | Tag 2 | Guía |
+| Plataforma | Tag 1 | Tag 2 | Video guía |
 |---|---|---|---|
 | Shopify | theme.liquid | [ver](Pixels/Pixel%201-All%20pages.html) | [En Shopify](https://drive.google.com/file/d/17YOgVuAJz3q6U6BdjcLmB6UXIjxiCsnu/view?usp=sharing)
 | Shopify | Customer Events | [ver](Pixels/Pixel%202%20Shopify-Customer%20events.js) | [En Shopify](https://drive.google.com/file/d/17YOgVuAJz3q6U6BdjcLmB6UXIjxiCsnu/view?usp=sharing)
@@ -54,7 +54,7 @@ var TravelsaleKeywords = [
 
 
 # Modelo de Atribución — Travelsale Tracking Pixel:
-![Modelo de atribución](./Assets/attribution_model_travelsale.svg)
+![Modelo de atribución](./analytics/attribution_model_travelsale.svg)
 
 LIMITACIONES:
 ✅ CAPTURA
