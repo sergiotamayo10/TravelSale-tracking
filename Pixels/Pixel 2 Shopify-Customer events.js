@@ -2,6 +2,7 @@ analytics.subscribe('checkout_completed', (event) => {
   // ── CONFIG ──────────────────────────────────────────────
   var GA4_ID          = 'G-R4P7Q8LVWW';
   var META_PIXEL_ID   = '8614226731956808';
+  var TIKTOK_PIXEL_ID = 'CP7QJJBC77U0P26EFT0G';
   var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxaIuH42xCkriDGv1fUMkvjX-Nk1Qp9sis7_3yC22TwBa_gNNYccPZAgbw0GH4hWO2_/exec';
   // ────────────────────────────────────────────────────────
 
@@ -132,7 +133,31 @@ analytics.subscribe('checkout_completed', (event) => {
     fireMetaPixel();
   }
 
-  // 7. CLEANUP
+      // 7. TIKTOK PIXEL
+  function fireTikTok() {
+    try {
+      window.ttq.load(TIKTOK_PIXEL_ID);
+      window.ttq.track('PlaceAnOrder', {
+        value:        orderValue,
+        currency:     currency,
+        order_id:     orderId,
+        content_type: 'product',
+        description:  storeDomain
+      });
+    } catch(e) {}
+  }
+
+  if (!window.ttq) {
+    var ttScript    = document.createElement('script');
+    ttScript.async  = true;
+    ttScript.src    = 'https://analytics.tiktok.com/i18n/pixel/events.js';
+    ttScript.onload = function() { fireTikTok(); };
+    document.head.appendChild(ttScript);
+  } else {
+    fireTikTok();
+  }
+
+  // 8. CLEANUP
   try {
     localStorage.removeItem('travelsale_data');
     sessionStorage.removeItem('travelsale_data');
