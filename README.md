@@ -32,7 +32,7 @@ Tag 1 detecta UTM y guarda en sessionStorage y localStorage
 | VTEX / GTM | Tag All Pages | [ver](Pixels/Pixel%201-All%20pages.html) | [En Tag manager](https://drive.google.com/file/d/1GQyFn6_z0cLH0iPJPv-7b5kHQtCHOEeG/view?usp=sharing)
 | VTEX / GTM | Tag Confirmation page | [ver](Pixels/Pixel%202%20GTM%20-Confirm%20page.html) | [En Tag manager](https://drive.google.com/file/d/1GQyFn6_z0cLH0iPJPv-7b5kHQtCHOEeG/view?usp=sharing)
 | Otros | All Pages | [ver](Pixels/Pixel%201-All%20pages.html) | [Sería similar a Shopify](https://drive.google.com/file/d/17YOgVuAJz3q6U6BdjcLmB6UXIjxiCsnu/view?usp=sharing)
-| Otros | Confirmation/Thank you page | [ver](Pixels/1.%20Instalación%20pixels) | No hay, depende de tu stack
+| Otros | Confirmation/Thank you page | [ver](Pixels/1.%20Instalación%20pixels.md) | No hay, depende de tu stack
 
 ### Keywords de detección activas
 ```javascript
