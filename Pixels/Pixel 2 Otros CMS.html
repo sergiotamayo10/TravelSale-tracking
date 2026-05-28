@@ -1,14 +1,14 @@
 <!-- Travelsale Conversion Pixel for other CMS-->
 <script>
 // ── CONFIG ──────────────────────────────────────────────
-var GA4_ID          = 'G-4730MSHDRJ';
-var META_PIXEL_ID   = '554963940501219';
+var GA4_ID          = 'G-R4P7Q8LVWW';
+var META_PIXEL_ID   = '7036816923091269';
 var TIKTOK_PIXEL_ID = 'CP7QJJBC77U0P26EFT0G';
-var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbydRbTiMXNk8_yzuVMPcyMMlDv1_XG4zt5CO9tJPMqgIDMjRrg_gfp2o5Br4S3W-gGc/exec';
+var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxaIuH42xCkriDGv1fUMkvjX-Nk1Qp9sis7_3yC22TwBa_gNNYccPZAgbw0GH4hWO2_/exec';
 // ────────────────────────────────────────────────────────
 
 // 1. READ localStorage
-var hsData      = {};
+var tsData      = {};
 var utmSource   = '';
 var utmMedium   = '';
 var utmCampaign = '';
@@ -20,14 +20,14 @@ var storeDomain = '';
 try {
   var stored = localStorage.getItem('travelsale_data');
   if (stored) {
-    hsData      = JSON.parse(stored);
-    utmSource   = hsData.utm_source   || '';
-    utmMedium   = hsData.utm_medium   || '';
-    utmCampaign = hsData.utm_campaign || '';
-    utmContent  = hsData.utm_content  || '';
-    utmTerm     = hsData.utm_term     || '';
-    utmId       = hsData.utm_id       || '';
-    storeDomain = hsData.store_domain || '';
+    tsData      = JSON.parse(stored);
+    utmSource   = tsData.utm_source   || '';
+    utmMedium   = tsData.utm_medium   || '';
+    utmCampaign = tsData.utm_campaign || '';
+    utmContent  = tsData.utm_content  || '';
+    utmTerm     = tsData.utm_term     || '';
+    utmId       = tsData.utm_id       || '';
+    storeDomain = tsData.store_domain || '';
   }
 } catch(e) {}
 
@@ -54,7 +54,7 @@ try {
       order_value:      orderValue,
       currency:         currency,
       store_domain:     storeDomain,
-      detection_signal: hsData.detection_signal || ''
+      detection_signal: tsData.detection_signal || ''
     }),
     keepalive: true
   }).then(function() {}).catch(function() {});
