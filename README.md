@@ -5,9 +5,9 @@ Captura compras realizadas en sitios de aliados atribuidas a tráfico de Travels
 
 ## ¿Cómo funciona?
 ```
-Campaña Travelsale → Usuario llega al aliado con UTM
+    Campaña Travelsale → Usuario llega al aliado con UTM
                           ↓
-             Tag 1 detecta UTM y guarda en localStorage
+Tag 1 detecta UTM y guarda en sessionStorage y localStorage
                           ↓
               Usuario compra → Thank you page
                           ↓
@@ -25,12 +25,14 @@ Campaña Travelsale → Usuario llega al aliado con UTM
 
 ## Instalación por plataforma
 
-| Plataforma | Tag 1 | Tag 2 | Video guía |
+| Plataforma | Comentario | Pixel | Video guía |
 |---|---|---|---|
-| Shopify | theme.liquid | [ver](Pixels/Pixel%201-All%20pages.html) | [En Shopify](https://drive.google.com/file/d/17YOgVuAJz3q6U6BdjcLmB6UXIjxiCsnu/view?usp=sharing)
-| Shopify | Customer Events | [ver](Pixels/Pixel%202%20Shopify-Customer%20events.js) | [En Shopify](https://drive.google.com/file/d/17YOgVuAJz3q6U6BdjcLmB6UXIjxiCsnu/view?usp=sharing)
-| VTEX / Otros / GTM | All Pages | [ver](Pixels/Pixel%201-All%20pages.html) | [En Tag manager](https://drive.google.com/file/d/1GQyFn6_z0cLH0iPJPv-7b5kHQtCHOEeG/view?usp=sharing)
-| VTEX / Otros / GTM | Confirmation page | [ver](Pixels/Pixel%202%20GTM%20-Confirm%20page.html) | [En Tag manager](https://drive.google.com/file/d/1GQyFn6_z0cLH0iPJPv-7b5kHQtCHOEeG/view?usp=sharing)
+| Shopify | En theme.liquid | [ver](Pixels/Pixel%201-All%20pages.html) | [En Shopify](https://drive.google.com/file/d/17YOgVuAJz3q6U6BdjcLmB6UXIjxiCsnu/view?usp=sharing)
+| Shopify | En Customer Events | [ver](Pixels/Pixel%202%20Shopify-Customer%20events.js) | [En Shopify](https://drive.google.com/file/d/17YOgVuAJz3q6U6BdjcLmB6UXIjxiCsnu/view?usp=sharing)
+| VTEX / GTM | Tag All Pages | [ver](Pixels/Pixel%201-All%20pages.html) | [En Tag manager](https://drive.google.com/file/d/1GQyFn6_z0cLH0iPJPv-7b5kHQtCHOEeG/view?usp=sharing)
+| VTEX / GTM | Tag Confirmation page | [ver](Pixels/Pixel%202%20GTM%20-Confirm%20page.html) | [En Tag manager](https://drive.google.com/file/d/1GQyFn6_z0cLH0iPJPv-7b5kHQtCHOEeG/view?usp=sharing)
+| Otros | All Pages | [ver](Pixels/Pixel%201-All%20pages.html) | [Sería similar a Shopify](https://drive.google.com/file/d/17YOgVuAJz3q6U6BdjcLmB6UXIjxiCsnu/view?usp=sharing)
+| Otros | Confirmation/Thank you page | [ver](Pixels/1.%20Instalación%20pixels) | No hay, depende de tu stack
 
 ### Keywords de detección activas
 ```javascript

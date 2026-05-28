@@ -1,0 +1,48 @@
+# Tag 1 — Captura de UTMs
+
+Detecta si el usuario viene de Travelsale y guarda los UTMs en sessionStorage
+para que Tag 2 los pueda leer al momento de la compra.
+
+## ¿Dónde se instala?   
+
+| Plataforma | Ubicación |
+|---|---|
+| Shopify | Admin → Online Store → Themes → Edit code → theme.liquid → antes de `</body>` |
+| VTEX / GTM | GTM → New Tag → Custom HTML → Trigger: All Pages |
+| Otro CMS | Pegar en el `<head>` o antes de `</body>` en el layout principal |
+
+## ¿Qué hace?
+
+1. Lee los parámetros UTM de la URL actual
+2. Verifica si alguno contiene una keyword de Travelsale
+3. Si sí → guarda en `localStorage` y `sessionStorage`:
+   - utm_source
+   - utm_medium  
+   - utm_campaign
+   - store_domain
+   - landed_at
+
+## Archivos
+
+- `gtm-version.js` → pegar en Custom HTML tag de GTM
+- `theme-liquid-version.html` → pegar en theme.liquid de Shopify
+  (incluye las etiquetas `<script>`)
+
+ # Tag 2 - Captura de compra
+ ## Detalles para otros CMS
+1. Debe exponer las variables en "window" en lugar del dataLayer. Aquí presentamos varios tipos de declaración:
+### PHP
+html<script>
+  window.TS_ORDER_ID    = '<?php echo $order->id; ?>';
+  window.TS_ORDER_VALUE = '<?php echo $order->total; ?>';
+  window.TS_CURRENCY    = 'COP';
+</script>
+
+### JavaScript / Node
+html<script>
+  window.TS_ORDER_ID    = '{{ order.id }}';
+  window.TS_ORDER_VALUE = '{{ order.total }}';
+  window.TS_CURRENCY    = 'COP';
+</script>
+
+La sintaxis exacta varía según su stack, lo importante es que debemos exponer esas tres variables antes de que cargue el Tag 2. [Aquí](./Pixel%202%20Otros%20CMS.html) está el tag 2 para otros CMS, si utilizas Adobe Analytics te sirve.

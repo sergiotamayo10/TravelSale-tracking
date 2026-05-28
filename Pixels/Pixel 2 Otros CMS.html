@@ -1,0 +1,160 @@
+<!-- Travelsale Conversion Pixel for other CMS-->
+<script>
+// ── CONFIG ──────────────────────────────────────────────
+var GA4_ID          = 'G-4730MSHDRJ';
+var META_PIXEL_ID   = '554963940501219';
+var TIKTOK_PIXEL_ID = 'CP7QJJBC77U0P26EFT0G';
+var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbydRbTiMXNk8_yzuVMPcyMMlDv1_XG4zt5CO9tJPMqgIDMjRrg_gfp2o5Br4S3W-gGc/exec';
+// ────────────────────────────────────────────────────────
+
+// 1. READ localStorage
+var hsData      = {};
+var utmSource   = '';
+var utmMedium   = '';
+var utmCampaign = '';
+var utmContent  = '';
+var utmTerm     = '';
+var utmId       = '';
+var storeDomain = '';
+
+try {
+  var stored = localStorage.getItem('travelsale_data');
+  if (stored) {
+    hsData      = JSON.parse(stored);
+    utmSource   = hsData.utm_source   || '';
+    utmMedium   = hsData.utm_medium   || '';
+    utmCampaign = hsData.utm_campaign || '';
+    utmContent  = hsData.utm_content  || '';
+    utmTerm     = hsData.utm_term     || '';
+    utmId       = hsData.utm_id       || '';
+    storeDomain = hsData.store_domain || '';
+  }
+} catch(e) {}
+
+// 2. VALIDATE
+if (!utmSource && !utmMedium && !utmCampaign) return;
+
+// 3. ORDER DATA — lee desde window (el ally las expone en la thank you page)
+var orderId    = window.TS_ORDER_ID    || '';
+var orderValue = parseFloat(window.TS_ORDER_VALUE) || 0;
+var currency   = window.TS_CURRENCY   || 'COP';
+
+// 4. APPS SCRIPT → SHEET
+try {
+  fetch(APPS_SCRIPT_URL, {
+    method:    'POST',
+    body:      JSON.stringify({
+      utm_source:       utmSource,
+      utm_medium:       utmMedium,
+      utm_campaign:     utmCampaign,
+      utm_content:      utmContent,
+      utm_term:         utmTerm,
+      utm_id:           utmId,
+      order_id:         orderId,
+      order_value:      orderValue,
+      currency:         currency,
+      store_domain:     storeDomain,
+      detection_signal: hsData.detection_signal || ''
+    }),
+    keepalive: true
+  }).then(function() {}).catch(function() {});
+} catch(e) {}
+
+// 5. GA4
+function fireGA4() {
+  try {
+    window.dataLayer = window.dataLayer || [];
+    if (!window.gtag) {
+      window.gtag = function() { window.dataLayer.push(arguments); };
+    }
+    window.gtag('config', GA4_ID, { send_page_view: false });
+    window.gtag('event', 'purchase', {
+      send_to:        GA4_ID,
+      transaction_id: orderId,
+      value:          orderValue,
+      currency:       currency,
+      utm_source:     utmSource,
+      utm_medium:     utmMedium,
+      utm_campaign:   utmCampaign,
+      store_domain:   storeDomain
+    });
+  } catch(e) {}
+}
+
+if (!document.querySelector('script[src*="googletagmanager.com/gtag"]')) {
+  var gScript    = document.createElement('script');
+  gScript.async  = true;
+  gScript.src    = 'https://www.googletagmanager.com/gtag/js?id=' + GA4_ID;
+  gScript.onload = function() {
+    window.gtag('js', new Date());
+    fireGA4();
+  };
+  document.head.appendChild(gScript);
+} else {
+  var ga4Tries = 0;
+  var ga4Timer = setInterval(function() {
+    if (typeof window.gtag === 'function') {
+      clearInterval(ga4Timer);
+      fireGA4();
+    } else if (++ga4Tries > 20) {
+      clearInterval(ga4Timer);
+      window.gtag = function() { window.dataLayer.push(arguments); };
+      fireGA4();
+    }
+  }, 100);
+}
+
+// 6. META PIXEL
+function fireMetaPixel() {
+  try {
+    window.fbq('init', META_PIXEL_ID);
+    window.fbq('track', 'Purchase', {
+      value:       orderValue,
+      currency:    currency,
+      order_id:    orderId,
+      content_url: storeDomain
+    });
+  } catch(e) {}
+}
+
+if (!window.fbq) {
+  var metaScript    = document.createElement('script');
+  metaScript.async  = true;
+  metaScript.src    = 'https://connect.facebook.net/en_US/fbevents.js';
+  metaScript.onload = function() { fireMetaPixel(); };
+  document.head.appendChild(metaScript);
+} else {
+  fireMetaPixel();
+}
+
+// 7. TIKTOK PIXEL
+function fireTikTok() {
+  try {
+    window.ttq.load(TIKTOK_PIXEL_ID);
+    window.ttq.track('PlaceAnOrder', {
+      value:        orderValue,
+      currency:     currency,
+      order_id:     orderId,
+      content_type: 'product',
+      description:  storeDomain
+    });
+  } catch(e) {}
+}
+
+if (!window.ttq) {
+  var ttScript    = document.createElement('script');
+  ttScript.async  = true;
+  ttScript.src    = 'https://analytics.tiktok.com/i18n/pixel/events.js';
+  ttScript.onload = function() { fireTikTok(); };
+  document.head.appendChild(ttScript);
+} else {
+  fireTikTok();
+}
+
+// 8. CLEANUP
+try {
+  localStorage.removeItem('travelsale_data');
+  sessionStorage.removeItem('travelsale_data');
+} catch(e) {}
+</script>
+<!-- End Travelsale Conversion Pixel for other CMS-->
