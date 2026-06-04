@@ -3,7 +3,7 @@ analytics.subscribe('checkout_completed', (event) => {
   var GA4_ID          = 'G-R4P7Q8LVWW';
   var META_PIXEL_ID   = '7036816923091269';
   var TIKTOK_PIXEL_ID = 'CP7QJJBC77U0P26EFT0G';
-  var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxaIuH42xCkriDGv1fUMkvjX-Nk1Qp9sis7_3yC22TwBa_gNNYccPZAgbw0GH4hWO2_/exec';
+  var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxEoqkhqDz9CAr9wHRKf7H-XDBKxDqdYA2P6H1vbedZRd78i5IGP1wIvWnyyJhhQ9Fv/exec';
   // ────────────────────────────────────────────────────────
 
   // 1. RECOVER SESSION
